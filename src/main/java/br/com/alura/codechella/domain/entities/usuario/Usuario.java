@@ -1,6 +1,7 @@
 package br.com.alura.codechella.domain.entities.usuario;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import br.com.alura.codechella.domain.Endereco;
 
@@ -16,6 +17,11 @@ public class Usuario {
 
         if (cpf == null || !cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}"))
             throw new IllegalArgumentException("CPF no padrão incorreto!");
+
+        int idade = Period.between(nascimento, LocalDate.now()).getYears();
+
+        if (idade < 18)
+            throw new IllegalArgumentException("Usuário deve ter pelo menos 18 anos de idade!");
 
         this.cpf = cpf;
         this.nome = nome;

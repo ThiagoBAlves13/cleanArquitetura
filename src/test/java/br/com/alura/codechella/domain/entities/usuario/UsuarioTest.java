@@ -21,6 +21,18 @@ public class UsuarioTest {
     }
 
     @Test
+    public void naoDeveCadastrarUsuarioComMenosDe18anos() {
+        LocalDate dataNascimento = LocalDate.now().minusYears(17);
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Usuario("123.456.789-00", "Fulano", dataNascimento, "fulano@example.com");
+        });
+    
+        Assertions.assertEquals("Usuário deve ter pelo menos 18 anos de idade!", exception.getMessage());
+    }
+
+
+    @Test
     public void deveCriarUsuarioComFabrica(){
 
         FabricaDeUsuario fabrica = new FabricaDeUsuario();
