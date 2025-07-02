@@ -2,10 +2,10 @@ package br.com.alura.codechella.naousar.service;
 
 import java.util.List;
 
-import br.com.alura.codechella.naousar.model.Usuario;
+import br.com.alura.codechella.infra.persistence.UsuarioEntity;
 
 public interface UsuarioService {
-    Usuario cadastrarUsuario(Usuario usuario);
+    UsuarioEntity cadastrarUsuario(UsuarioEntity usuario);
 
-    List<Usuario> listarTodos();
+    List<UsuarioEntity> listarTodos();
 }

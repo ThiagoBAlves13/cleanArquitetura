@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.alura.codechella.naousar.model.Usuario;
+import br.com.alura.codechella.infra.persistence.UsuarioEntity;
 import br.com.alura.codechella.naousar.service.UsuarioService;
 import jakarta.validation.Valid;
 
@@ -25,7 +25,7 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid Usuario usuario, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrar(@RequestBody @Valid UsuarioEntity usuario, UriComponentsBuilder uriBuilder) {
         service.cadastrarUsuario(usuario);
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 
@@ -33,7 +33,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listar() {
+    public ResponseEntity<List<UsuarioEntity>> listar() {
         return ResponseEntity.ok(service.listarTodos());
     }
 
